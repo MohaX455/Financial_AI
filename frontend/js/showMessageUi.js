@@ -5,20 +5,29 @@ function displayMessage(role, content) {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
 
-    setTimeout(() => {
-        const bubble = role === "user"
-            ? `<div class='flex justify-end w-full'>
-                <p class='bg-[#444] py-2.5 px-5 w-fit rounded-[20px] max-w-[250px] md:max-w-[370px] min-w-[70px] flex flex-wrap break-words text-wrap justify-center items-center mr-0 md:mr-8 shadow-lg'>
-                    ${escapedContent}
-                </p>
-            </div>`
-            : `<div class='flex justify-start w-full'>
-                <p class='my-6'>${escapedContent}</p>
-            </div>`;
+    const bubbleContainer = document.createElement('div');
+    const bubbleP = document.createElement('p');
 
-        messages.insertAdjacentHTML('beforeend', bubble);
-        messages.scrollTop = messages.scrollHeight;
-    }, 500);
+    // const bubble = role === "user"
+    //     ? `<div class='flex justify-end w-full'>
+    //         <p class='bg-[#444] py-2.5 px-5 w-fit rounded-[20px] max-w-[250px] md:max-w-[370px] min-w-[70px] flex flex-wrap break-words text-wrap justify-center items-center mr-0 md:mr-8 shadow-lg'>
+    //             ${escapedContent}
+    //         </p>
+    //     </div>`
+    //     : `<div class='flex justify-start w-full'>
+    //         <p class='my-6'>${escapedContent}</p>
+    //     </div>`;
+
+    bubbleContainer.className = role === "user" ? "flex justify-end w-full" : "flex justify-start w-full";
+
+    bubbleP.className = role === "user" ? "bg-[#444] py-2.5 px-5 w-fit rounded-[20px] max-w-[250px] md:max-w-[370px] min-w-[70px] flex flex-wrap break-words text-wrap justify-center items-center mr-0 md:mr-8 shadow-lg" : "my-6";
+
+    bubbleP.textContent = escapedContent;
+    bubbleContainer.appendChild(bubbleP);
+    messages.appendChild(bubbleContainer);
+    // messages.insertAdjacentHTML('beforeend', bubble);
+    messages.scrollTop = messages.scrollHeight;
+    return bubbleP;
 }
 
 export default displayMessage;

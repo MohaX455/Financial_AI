@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         setTimeout(() => {
             questionInput.value = ''
-        }, 50)
+        }, 100)
 
         setTimeout(() => {
             const loader = document.querySelector('#loader');
@@ -126,6 +126,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             messages.appendChild(loader)
             messages.scrollTop = messages.scrollHeight;
         }, 600)
+
+        // Fonction machine à écrire
+        function simulateTyping(text, botBubble, speed = 30) {
+            let i = 0;
+            const interval = setInterval(() => {
+                botBubble.textContent += text.charAt(i);
+                i++;
+                messages.scrollTop = messages.scrollHeight; // scroll auto
+                if (i >= text.length) clearInterval(interval);
+            }, speed);
+        }
+
 
         // Connexion to workflow 
         try {
@@ -144,7 +156,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (res.ok) {
                 // Show and record user messsage and ai response
                 if (aiResponse) {
-                    displayMessage("bot", aiResponse);
+                    const botBubble = displayMessage("bot", "");
+                    // Simuler écriture
+                    // const botBubble = messages.lastElementChild
+                    simulateTyping(aiResponse, botBubble, 5);
                 } else {
                     console.error("Réponse AI vide", data);
                 }
