@@ -5,7 +5,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
     const name = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    
+
     const message = document.getElementById("message");
     console.log(name, email, password)
 
@@ -26,7 +26,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
             alert(data.message)
             return;
         }
-        
+
         localStorage.setItem('token', data.token)
         alert(data.message)
         window.location.href = "../chatbot.html";

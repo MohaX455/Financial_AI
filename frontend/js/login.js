@@ -23,7 +23,6 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         }
 
         localStorage.setItem('token', data.token)
-        alert(data.message)
         window.location.href = "../chatbot.html";
     } catch (err) {
         console.log("error: ", err)

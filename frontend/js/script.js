@@ -1,3 +1,4 @@
+
 import displayMessage from "./showMessageUi.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -5,9 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const popover = document.getElementById("popover")
     const fileName = document.getElementById('fileName')
 
-
     // Connexion au n8n
-
     const form = document.querySelector('#form')
 
     form.addEventListener('submit', async (e) => {
@@ -68,7 +67,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             messages.classList.add('h-full');
         }
 
-
         let convId = localStorage.getItem("currentConvId");
 
         if (convId) {
@@ -106,6 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Afficher direct le message utilisateur
         const messageContain = questionInput.value.trim()
+
         displayMessage("user", messageContain);
 
         //  Affiche et ouvre
@@ -121,20 +120,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             questionInput.value = ''
         }, 50)
 
-        // Enregistrer le message utilisateur en base
-        await fetch(`http://localhost:3000/api/conversations/${convId}/messages`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ role: "user", content: messageContain })
-        });
+        setTimeout(() => {
+            const loader = document.querySelector('#loader');
+            loader.classList.remove('hidden');
+            messages.appendChild(loader)
+            messages.scrollTop = messages.scrollHeight;
+        }, 600)
 
-        // Connexion to workflow
-
+        // Connexion to workflow 
         try {
-            const res = await fetch('https://api.jetcamer.com:8443/webhook-test/gestion_finance', {
+            const res = await fetch('https://api.jetcamer.com:8443/webhook/gestion_finance', {
                 // const res = await fetch(`https://api.jetcamer.com/ask-ai?question=${encodeURIComponent(messageContain)}`, {
                 // const res = await fetch('http://localhost:5678/webhook-test/gestion_finance', {
                 method: 'POST',
@@ -142,19 +137,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             const data = await res.json();
-            const aiResponse = data[0]?.output
-            // const aiResponse = data.answer
+            const aiResponse = data[0]?.output || data.answer || "Aucune réponse reçue";
             console.log(data)
+            loader.classList.add('hidden')
 
             if (res.ok) {
-
-                // Afficher et enregistrer la réponse IA
+                // Show and record user messsage and ai response
                 if (aiResponse) {
                     displayMessage("bot", aiResponse);
                 } else {
                     console.error("Réponse AI vide", data);
                 }
 
+                // Recording user message
+                await fetch(`http://localhost:3000/api/conversations/${convId}/messages`, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ role: "user", content: messageContain })
+                });
+
+                // Recording Ai response
 
                 await fetch(`http://localhost:3000/api/conversations/${convId}/messages`, {
                     method: "POST",

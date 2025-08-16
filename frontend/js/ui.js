@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileName = document.getElementById('fileName')
     const MAX_LENGTH = 45;
     const connect = document.querySelector('#connect')
+    const messages = document.querySelector('#messages')
+            const container = document.querySelector('#container')
+        const title = document.querySelector('#title')
+        const form = document.querySelector('#form')
 
     connect.addEventListener('click', function () {
         window.location.href = './pages/login.html'
@@ -83,6 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     connect.classList.remove('hidden');
                     userInfo.classList.add('hidden');
                     logout.classList.add('hidden');
+                    messages.innerHTML = ''
+                    //  Affiche et ouvre
+                    messages.classList.replace('h-full', 'h-0');
+                    container.classList.replace('justify-normal', 'justify-center');
+                    title.classList.remove('hidden');
+                    form.classList.add('md:w-xl');
+                    popover.classList.remove('bottom-14');
+                    fileName.classList.add('hidden');
+                    fileName.textContent = '';
                 });
             })
             .catch(err => {
