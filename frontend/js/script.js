@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Connexion to workflow 
         try {
-            const res = await fetch('https://api.jetcamer.com:8443/webhook/gestion_finance', {
-                // const res = await fetch(`https://api.jetcamer.com/ask-ai?question=${encodeURIComponent(messageContain)}`, {
+            // const res = await fetch('https://api.jetcamer.com:8443/webhook-test/gestion_finance', {
+                const res = await fetch(`https://api.jetcamer.com/ask-ai?question=${encodeURIComponent(messageContain)}`, {
                 // const res = await fetch('http://localhost:5678/webhook-test/gestion_finance', {
-                method: 'POST',
-                body: formData
+                // method: 'POST',
+                // body: formData
             });
 
             const data = await res.json();
@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.error('Echec du fetch');
             }
         } catch (err) {
+            questionInput.value = ''
+            loader.classList.add('hidden')
             console.error('Erreur de verification :', err)
         }
     });

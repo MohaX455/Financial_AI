@@ -56,7 +56,7 @@
     <header
         class="w-full h-[8.5vh] sticky top-0 z-90 bg-[#111] md:bg-[#222] flex justify-center items-center text-white">
         <nav
-            class="w-full md:w-[75%] h-full flex items-center justify-between md:border-b-[1.5px] border-[rgba(255_255_255_/_0.3)] px-4">
+            class="w-full md:w-[75%] h-full flex items-center justify-between md:border-b-[1.5px] border-[rgba(255_255_255_/_0.3)] px-6">
             <div>
                 <a href="./chatbot.html" class="text-xl md:text-2xl font-medium">JetCamer</a>
             </div>
@@ -113,7 +113,14 @@
                 </div>
             </div>
 
-            <div class="flex md:hidden">
+            <div class="flex justify-center items-center gap-6 md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="text-white hover:text-[rgba(255_255_255_/_0.8)] transition-all duration-200 cursor-pointer lucide lucide-square-pen-icon lucide-square-pen">
+                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path
+                        d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="text-white hover:text-[rgba(255_255_255_/_0.8)] transition-all duration-200 cursor-pointer lucide lucide-align-right-icon lucide-align-right">
@@ -144,7 +151,7 @@
             </div>
 
             <form id="form"
-                class="bg-[#333] rounded-[20px] min-h-[55px] max-h-[115px] w-[95%] md:w-xl border-[rgba(255_255_255_/_0.1)] border-[1.5px] max-md:absolute max-md:bottom-10 shadow-lg"
+                class="bg-[#333] rounded-[20px] min-h-[55px] max-h-[115px] w-[92.5%] md:w-xl border-[rgba(255_255_255_/_0.1)] border-[1.5px] max-md:fixed max-md:bottom-10 shadow-lg"
                 autocomplete="off" method="POST" enctype="multipart/form-data">
 
                 <div id="fileName"
