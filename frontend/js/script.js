@@ -141,8 +141,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Connexion to workflow 
         try {
-            // const res = await fetch('https://api.jetcamer.com:8443/webhook-test/gestion_finance', {
-                const res = await fetch(`https://api.jetcamer.com/ask-ai?question=${encodeURIComponent(messageContain)}`, {
+            // const res = await fetch('https://api.jetcamer.com:8443/webhook/gestion_finance', {
+            const res = await fetch(`https://api.jetcamer.com/ask-ai?question=${encodeURIComponent(messageContain)}`, {
                 // const res = await fetch('http://localhost:5678/webhook-test/gestion_finance', {
                 // method: 'POST',
                 // body: formData
